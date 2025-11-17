@@ -8,15 +8,29 @@
 plugins {
     // Apply the java-library plugin for API and implementation separation.
     id 'java-library'
-
+    // Apply the version catalog plugin to manage dependencies
+    id 'io.spring.dependency-management' version '1.1.6'
 }
+
+group = 'org.bangbang'
+version = '0.0.1'
 
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
 
+dependencyManagement {
+    imports {
+        // MSA 서비스들이 쓸 Spring Boot 버전에 맞춰서 맞춰주면 좋음
+        mavenBom "org.springframework.boot:spring-boot-dependencies:3.2.6"
+        // 버전은 네가 실제 사용하는 Boot 버전에 맞춰 바꿔도 됨
+    }
+}
+
 dependencies {
+    implementation libs.lombok
+
     // Use JUnit Jupiter for testing.
     testImplementation libs.junit.jupiter
 
@@ -27,6 +41,23 @@ dependencies {
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation libs.guava
+
+    // common spring depencencies
+    api 'org.springframework.boot:spring-boot-starter-web'
+    api 'org.springframework.boot:spring-boot-starter-validation'
+    api 'org.springframework.boot:spring-boot-starter-security'
+
+    // 롬복 쓰면
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // jpa dependency
+    api 'jakarta.persistence:jakarta.persistence-api'
+    api 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    api 'org.springframework.boot:spring-boot-starter-security'
+
+    api 'org.springdoc:springdoc-openapi-starter-common:2.6.0'
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
