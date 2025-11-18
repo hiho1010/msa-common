@@ -27,34 +27,30 @@ dependencyManagement {
 }
 
 dependencies {
-    dependencies {
-        // 공통 스택 – 서비스에서 바로 쓸 타입들
-        api 'org.springframework.boot:spring-boot-starter-web'
-        api 'org.springframework.boot:spring-boot-starter-security'
-        api 'org.springframework.boot:spring-boot-starter-data-jpa'
-        api 'org.springframework.boot:spring-boot-starter-aop'
+    // 공통 스택 – 서비스에서 바로 쓸 타입들
+    api 'org.springframework.boot:spring-boot-starter-web'
+    api 'org.springframework.boot:spring-boot-starter-security'
+    api 'org.springframework.boot:spring-boot-starter-data-jpa'
+    api 'org.springframework.boot:spring-boot-starter-aop'
 
-        api 'org.springframework.cloud:spring-cloud-starter-config'
-        api 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
-        api 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-        api 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    api 'org.springframework.cloud:spring-cloud-starter-config'
+    api 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
+    api 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    api 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
-        api 'io.github.resilience4j:resilience4j-spring-boot3'
-        api 'io.github.resilience4j:resilience4j-circuitbreaker'
-        api 'io.github.resilience4j:resilience4j-retry'
-        api 'io.github.resilience4j:resilience4j-bulkhead'
-        api 'io.github.resilience4j:resilience4j-ratelimiter'
+    api 'io.github.resilience4j:resilience4j-spring-boot3'
+    api 'io.github.resilience4j:resilience4j-circuitbreaker'
+    api 'io.github.resilience4j:resilience4j-retry'
+    api 'io.github.resilience4j:resilience4j-bulkhead'
+    api 'io.github.resilience4j:resilience4j-ratelimiter'
 
-        api 'io.micrometer:micrometer-core'
+    api 'io.micrometer:micrometer-core'
 
-        api 'org.projectlombok:lombok'
+    api 'org.projectlombok:lombok'
 
-        // 공통이지만 굳이 api까지는 필요 없는 애들
-        implementation 'org.springframework.boot:spring-boot-starter-actuator'
-        implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.13'
-
-
-    }
+    // 공통이지만 굳이 api까지는 필요 없는 애들
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.13'
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
