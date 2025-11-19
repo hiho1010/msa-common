@@ -19,6 +19,7 @@ bootJar {
 
 jar {
     enabled = true
+    archiveClassifier = null
 }
 
 // 버전 변수
