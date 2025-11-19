@@ -41,6 +41,7 @@ dependencies {
     api 'org.springframework.boot:spring-boot-starter-security'
     api 'org.springframework.boot:spring-boot-starter-data-jpa'
     api 'org.springframework.boot:spring-boot-starter-aop'
+    api 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 
     // --- [2] Spring Cloud ---
     api 'org.springframework.cloud:spring-cloud-starter-config'
