@@ -1,4 +1,4 @@
-package org.bangbang.infrastructure.security;
+package org.bangbang.infrastructure.keycloack;
 
 import java.util.Collection;
 import org.bangbang.common.security.UserPrincipal;
