@@ -76,7 +76,13 @@ java {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            from components.java
+            // from components.java // 👈 이 줄을 주석 처리하거나 제거합니다.
+
+            // 💡 수정: 'jar' 태스크의 결과물을 직접 추가하여 -plain 접미사가 없는
+            // JAR 파일을 메인 아티팩트로 지정합니다.
+            artifact(jar) {
+                classifier = null
+            }
         }
     }
 }
