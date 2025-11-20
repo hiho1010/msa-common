@@ -49,6 +49,7 @@ dependencies {
     api 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
     api 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     api 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    api 'org.springframework.cloud:spring-cloud-starter-stream-kafka'
 
     // --- [3] Resilience4j ---
     api 'io.github.resilience4j:resilience4j-spring-boot3'
