@@ -3,8 +3,11 @@ package org.bangbang.infrastructure.kafka.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.bangbang.infrastructure.kafka.publisher.EventPublisher;
+import org.bangbang.infrastructure.kafka.publisher.SpringCloudStreamPublisher;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.converter.MessageConverter;
@@ -29,5 +32,9 @@ public class CommonKafkaConfig {
         return converter;
     }
 
-
+    @Bean
+    @ConditionalOnMissingBean
+    public EventPublisher eventPublisher(StreamBridge streamBridge) {
+        return new SpringCloudStreamPublisher(streamBridge);
+    }
 }

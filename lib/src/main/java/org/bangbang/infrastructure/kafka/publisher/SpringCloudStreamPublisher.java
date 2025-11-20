@@ -1,0 +1,25 @@
+package org.bangbang.infrastructure.kafka.publisher;
+
+import lombok.extern.slf4j.Slf4j;
+import org.bangbang.infrastructure.exception.ApplicationException;
+import org.bangbang.infrastructure.exception.ErrorCode;
+import org.bangbang.infrastructure.kafka.event.BaseEvent;
+import org.springframework.cloud.stream.function.StreamBridge;
+
+@Slf4j
+public record SpringCloudStreamPublisher(StreamBridge streamBridge) implements EventPublisher {
+
+    @Override
+    public void publish(String bindingName, BaseEvent event) {
+        log.info("이벤트 발행 시작 [Binding: {}, ID: {}]", bindingName, event.getEventId());
+
+        boolean sent = streamBridge.send(bindingName, event);
+
+        if (!sent) {
+            log.error("이벤트 발행 실패 [Binding: {}, ID: {}]", bindingName, event.getEventId());
+            throw new ApplicationException(ErrorCode.BAD_REQUEST, "이벤트 발행 실패: " + bindingName);
+        }
+
+        log.info("이벤트 발행 성공 [Binding: {}, ID: {}]", bindingName, event.getEventId());
+    }
+}
