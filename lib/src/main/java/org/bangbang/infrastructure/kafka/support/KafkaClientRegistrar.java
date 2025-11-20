@@ -1,5 +1,9 @@
 package org.bangbang.infrastructure.kafka.support;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Map;
+import org.bangbang.infrastructure.kafka.annotation.EnableKafkaClients;
 import org.bangbang.infrastructure.kafka.annotation.KafkaClient;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
@@ -61,10 +65,21 @@ public class KafkaClientRegistrar implements ImportBeanDefinitionRegistrar, Envi
     }
 
     private Set<String> getBasePackages(AnnotationMetadata importingClassMetadata) {
-        // 실제 구현 시에는 @EnableKafkaClients 어노테이션 속성에서 패키지를 읽어오거나,
-        // 호출한 클래스의 패키지를 기본값으로 사용합니다.
-        // 여기서는 간단히 현재 실행 중인 메인 클래스의 패키지를 쓴다고 가정하거나 고정값을 쓸 수 있습니다.
-        // *실무 팁: ClassUtils.getPackageName(importingClassMetadata.getClassName()) 사용
-        return Set.of(ClassUtils.getPackageName(importingClassMetadata.getClassName()));
+        Map<String, Object> attributes = importingClassMetadata.getAnnotationAttributes(
+            EnableKafkaClients.class.getName());
+        Set<String> basePackages = new HashSet<>();
+
+        if (attributes != null && attributes.containsKey("basePackages")) {
+            String[] packages = (String[]) attributes.get("basePackages");
+            if (packages != null && packages.length > 0) {
+                Collections.addAll(basePackages, packages);
+            }
+        }
+
+        // 속성에 아무것도 안 적었으면, 해당 어노테이션을 붙인 클래스의 패키지를 기본값으로 사용
+        if (basePackages.isEmpty()) {
+            basePackages.add(ClassUtils.getPackageName(importingClassMetadata.getClassName()));
+        }
+        return basePackages;
     }
 }
