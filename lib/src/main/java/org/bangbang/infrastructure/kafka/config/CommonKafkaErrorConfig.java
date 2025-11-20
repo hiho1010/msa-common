@@ -29,8 +29,6 @@ public class CommonKafkaErrorConfig {
 
     @Bean
     public ListenerContainerCustomizer<AbstractMessageListenerContainer<?, ?>> customizer(DefaultErrorHandler errorHandler) {
-        return (container, destinationName, group) -> {
-            container.setCommonErrorHandler(errorHandler);
-        };
+        return (container, destinationName, group) -> container.setCommonErrorHandler(errorHandler);
     }
 }
