@@ -64,6 +64,9 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     api 'com.fasterxml.jackson.core:jackson-databind'
 
+    api 'io.micrometer:micrometer-tracing'
+    api 'io.micrometer:micrometer-tracing-bridge-brave'
+
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springDocVersion}"
 }
